@@ -1,0 +1,311 @@
+/* ===== Variables: colores y medidas que se reutilizan en todo el sitio ===== */
+:root {
+  --fondo: #eef1ee;          /* gris verdoso claro del fondo de página */
+  --superficie: #ffffff;     /* blanco de las tarjetas */
+  --borde: #dbe1db;
+  --tinta: #1c2a22;          /* color principal del texto */
+  --tinta-suave: #5d6e63;    /* texto secundario */
+  --verde: #14543f;          /* verde "billete": el protagonista del diseño */
+  --verde-claro: #cfe3d9;
+  --error: #a4262c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  background: var(--fondo);
+  color: var(--tinta);
+  line-height: 1.5;
+}
+
+.contenedor {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ===== Encabezado ===== */
+.encabezado {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+}
+
+.encabezado h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.encabezado p {
+  margin: 0;
+  max-width: 34rem;
+  color: var(--tinta-suave);
+}
+
+/* ===== Panel principal: formulario + resultado ===== */
+.panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  margin-bottom: 1.25rem;
+}
+
+.tarjeta {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.tarjeta h2 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+/* Campos del formulario */
+.campo {
+  margin-bottom: 1rem;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  color: var(--tinta-suave);
+}
+
+.campo input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font-size: 1.05rem;
+  font-family: inherit;
+  color: var(--tinta);
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.campo input:focus {
+  outline: 2px solid var(--verde);
+  outline-offset: 1px;
+  border-color: var(--verde);
+}
+
+.mensaje-error {
+  margin: 0.5rem 0 0;
+  color: var(--error);
+  font-weight: 600;
+}
+
+/* ===== Resultado: las dos cuotas son el elemento protagonista ===== */
+.cuota-destacada {
+  background: var(--verde);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.cuota-opcion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Línea divisoria entre las dos cuotas */
+.cuota-opcion + .cuota-opcion {
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  padding-left: 1.25rem;
+}
+
+.cuota-etiqueta {
+  font-size: 0.95rem;
+  color: var(--verde-claro);
+}
+
+.cuota-valor {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.cuota-detalle {
+  font-size: 0.9rem;
+  color: var(--verde-claro);
+}
+
+/* Lista de totales debajo de la cuota */
+.detalles {
+  margin: 1.25rem 0 0;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 0.25rem 1.5rem;
+}
+
+.detalle {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--borde);
+}
+
+.detalle:last-child { border-bottom: none; }
+
+.detalle span { color: var(--tinta-suave); font-size: 0.95rem; }
+
+.detalle strong {
+  font-weight: 600;
+  font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Mini-tabla que compara pagar mensual vs. quincenal */
+.comparacion {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.comparacion th,
+.comparacion td {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--borde);
+}
+
+.comparacion thead th {
+  text-align: right;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+}
+
+.comparacion tbody th {
+  text-align: left;
+  font-weight: 400;
+  color: var(--tinta-suave);
+}
+
+.comparacion tbody td {
+  text-align: right;
+  font-weight: 600;
+  padding-left: 1rem;
+}
+
+.comparacion tr:last-child th,
+.comparacion tr:last-child td { border-bottom: none; }
+
+/* ===== Tabla de amortización ===== */
+.seccion-tabla { margin-bottom: 1.25rem; }
+
+.nota-tabla {
+  margin: -0.5rem 0 1rem;
+  color: var(--tinta-suave);
+  font-size: 0.9rem;
+  max-width: 36rem;
+}
+
+/* Si la tabla no cabe (pantallas chicas) aparece scroll horizontal;
+   si es muy larga, scroll vertical con el encabezado fijo. */
+.tabla-contenedor {
+  overflow: auto;
+  max-height: 60vh;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+}
+
+/* Botones para alternar entre la vista mensual y quincenal */
+.selector-tabla {
+  display: inline-flex;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.boton-modo {
+  padding: 0.45rem 1.1rem;
+  background: var(--superficie);
+  border: none;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--tinta-suave);
+  cursor: pointer;
+}
+
+.boton-modo + .boton-modo { border-left: 1px solid var(--borde); }
+
+.boton-modo.activo {
+  background: var(--verde);
+  color: #ffffff;
+}
+
+.boton-modo:focus-visible {
+  outline: 2px solid var(--verde);
+  outline-offset: -2px;
+}
+
+.tabla-contenedor table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
+}
+
+.tabla-contenedor th,
+.tabla-contenedor td {
+  padding: 0.55rem 0.9rem;
+  text-align: right;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--borde);
+}
+
+.tabla-contenedor th:first-child,
+.tabla-contenedor td:first-child { text-align: center; }
+
+.tabla-contenedor thead th {
+  position: sticky;
+  top: 0;
+  background: var(--superficie);
+  color: var(--tinta-suave);
+  font-weight: 600;
+  box-shadow: 0 1px 0 var(--borde);
+}
+
+.tabla-contenedor tbody tr:last-child td {
+  font-weight: 600;
+  border-bottom: none;
+}
+
+/* ===== Pie de página ===== */
+.pie {
+  padding-bottom: 2.5rem;
+  color: var(--tinta-suave);
+  font-size: 0.85rem;
+}
+
+/* ===== Pantallas chicas: todo en una sola columna ===== */
+@media (max-width: 720px) {
+  .panel { grid-template-columns: 1fr; }
+  .encabezado { padding-top: 2rem; }
+  .encabezado h1 { font-size: 1.7rem; }
+
+  /* Las dos cuotas se apilan y la línea divisoria pasa a ser horizontal */
+  .cuota-destacada { grid-template-columns: 1fr; }
+  .cuota-opcion + .cuota-opcion {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    padding-top: 1rem;
+  }
+}

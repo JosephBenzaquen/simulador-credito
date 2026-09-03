@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador de crédito</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="contenedor encabezado">
+    <h1>Simulador de crédito</h1>
+    <p>Calcula la cuota de tu préstamo pagando cada mes o cada quincena, y mira cómo se reparte cada pago entre interés y capital. Sistema de amortización francés: la cuota es fija durante todo el crédito.</p>
+  </header>
+
+  <main class="contenedor">
+
+    <!-- Panel principal: formulario a la izquierda, resultado a la derecha -->
+    <section class="panel">
+
+      <form id="formulario" class="tarjeta" autocomplete="off">
+        <h2>Datos del crédito</h2>
+
+        <div class="campo">
+          <label for="precio">Precio del bien (US$)</label>
+          <input type="number" id="precio" value="25000" min="0" step="100">
+        </div>
+
+        <div class="campo">
+          <label for="inicial">Cuota inicial (US$)</label>
+          <input type="number" id="inicial" value="5000" min="0" step="100">
+        </div>
+
+        <div class="campo">
+          <label for="tasa">Tasa de interés anual (%)</label>
+          <input type="number" id="tasa" value="8.5" min="0" step="0.1">
+        </div>
+
+        <div class="campo">
+          <label for="plazo">Plazo en meses</label>
+          <input type="number" id="plazo" value="36" min="1" step="1">
+        </div>
+
+        <p id="mensaje-error" class="mensaje-error" hidden></p>
+      </form>
+
+      <!-- El resultado se actualiza solo, cada vez que cambias un dato -->
+      <div class="resultado" aria-live="polite">
+        <div class="cuota-destacada">
+          <div class="cuota-opcion">
+            <span class="cuota-etiqueta">Si pagas cada mes</span>
+            <strong id="cuota-mensual" class="cuota-valor">—</strong>
+            <span id="detalle-mensual" class="cuota-detalle"></span>
+          </div>
+          <div class="cuota-opcion">
+            <span class="cuota-etiqueta">Si pagas cada quincena</span>
+            <strong id="cuota-quincenal" class="cuota-valor">—</strong>
+            <span id="detalle-quincenal" class="cuota-detalle"></span>
+          </div>
+        </div>
+
+        <div class="detalles">
+          <div class="detalle">
+            <span>Monto financiado</span>
+            <strong id="monto-financiado">—</strong>
+          </div>
+          <!-- Comparación de las dos modalidades de pago -->
+          <table class="comparacion">
+            <thead>
+              <tr>
+                <td></td>
+                <th scope="col">Mensual</th>
+                <th scope="col">Quincenal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Total pagado</th>
+                <td id="total-pagado-mensual">—</td>
+                <td id="total-pagado-quincenal">—</td>
+              </tr>
+              <tr>
+                <th scope="row">Total de intereses</th>
+                <td id="total-intereses-mensual">—</td>
+                <td id="total-intereses-quincenal">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Tabla mes a mes -->
+    <section class="tarjeta seccion-tabla">
+      <h2>Tabla de amortización</h2>
+      <p class="nota-tabla">Así baja tu deuda pago a pago: una parte de cada cuota cubre el interés y el resto reduce el saldo. Elige cómo verla:</p>
+      <div class="selector-tabla" role="group" aria-label="Frecuencia de pago">
+        <button type="button" id="boton-mensual" class="boton-modo activo" aria-pressed="true">Por meses</button>
+        <button type="button" id="boton-quincenal" class="boton-modo" aria-pressed="false">Por quincenas</button>
+      </div>
+      <div class="tabla-contenedor">
+        <table>
+          <thead>
+            <tr>
+              <th id="titulo-periodo">Mes</th>
+              <th>Cuota</th>
+              <th>Interés</th>
+              <th>Capital</th>
+              <th>Saldo</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpo-tabla"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="contenedor pie">
+    <p>Proyecto académico. Los valores calculados son referenciales.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
