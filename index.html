@@ -3,14 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Simulador de crédito</title>
+  <title>Calculadora de préstamos estudiantiles</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <header class="contenedor encabezado">
-    <h1>Simulador de crédito</h1>
-    <p>Calcula la cuota de tu préstamo pagando cada mes o cada quincena, y mira cómo se reparte cada pago entre interés y capital. Sistema de amortización francés: la cuota es fija durante todo el crédito.</p>
+    <div class="encabezado-fila">
+      <div class="encabezado-marca">
+        <img src="yu-logo.svg" alt="Yeshiva University" class="logo-yu">
+        <h1 data-texto="titulo">Calculadora de préstamos estudiantiles</h1>
+      </div>
+      <!-- Botón que alterna el idioma de toda la página -->
+      <button type="button" id="boton-idioma" class="boton-idioma">English</button>
+    </div>
+    <p data-texto="intro">Planifica cómo financiar tus estudios en Yeshiva University: calcula tu cuota pagando cada mes o cada quincena, y mira cómo se reparte cada pago entre interés y capital. La cuota es fija durante todo el préstamo (sistema de amortización francés).</p>
   </header>
 
   <main class="contenedor">
@@ -19,26 +26,26 @@
     <section class="panel">
 
       <form id="formulario" class="tarjeta" autocomplete="off">
-        <h2>Datos del crédito</h2>
+        <h2 data-texto="datosCredito">Datos del préstamo</h2>
 
         <div class="campo">
-          <label for="precio">Precio del bien (US$)</label>
-          <input type="number" id="precio" value="25000" min="0" step="100">
+          <label for="precio" data-texto="labelPrecio">Costo de la matrícula (US$)</label>
+          <input type="number" id="precio" value="48000" min="0" step="500">
         </div>
 
         <div class="campo">
-          <label for="inicial">Cuota inicial (US$)</label>
-          <input type="number" id="inicial" value="5000" min="0" step="100">
+          <label for="inicial" data-texto="labelInicial">Pago inicial (US$)</label>
+          <input type="number" id="inicial" value="8000" min="0" step="500">
         </div>
 
         <div class="campo">
-          <label for="tasa">Tasa de interés anual (%)</label>
-          <input type="number" id="tasa" value="8.5" min="0" step="0.1">
+          <label for="tasa" data-texto="labelTasa">Tasa de interés anual (%)</label>
+          <input type="number" id="tasa" value="6.5" min="0" step="0.1">
         </div>
 
         <div class="campo">
-          <label for="plazo">Plazo en meses</label>
-          <input type="number" id="plazo" value="36" min="1" step="1">
+          <label for="plazo" data-texto="labelPlazo">Plazo en meses</label>
+          <input type="number" id="plazo" value="48" min="1" step="1">
         </div>
 
         <p id="mensaje-error" class="mensaje-error" hidden></p>
@@ -48,12 +55,12 @@
       <div class="resultado" aria-live="polite">
         <div class="cuota-destacada">
           <div class="cuota-opcion">
-            <span class="cuota-etiqueta">Si pagas cada mes</span>
+            <span class="cuota-etiqueta" data-texto="siMes">Si pagas cada mes</span>
             <strong id="cuota-mensual" class="cuota-valor">—</strong>
             <span id="detalle-mensual" class="cuota-detalle"></span>
           </div>
           <div class="cuota-opcion">
-            <span class="cuota-etiqueta">Si pagas cada quincena</span>
+            <span class="cuota-etiqueta" data-texto="siQuincena">Si pagas cada quincena</span>
             <strong id="cuota-quincenal" class="cuota-valor">—</strong>
             <span id="detalle-quincenal" class="cuota-detalle"></span>
           </div>
@@ -61,7 +68,7 @@
 
         <div class="detalles">
           <div class="detalle">
-            <span>Monto financiado</span>
+            <span data-texto="montoFinanciado">Monto financiado</span>
             <strong id="monto-financiado">—</strong>
           </div>
           <!-- Comparación de las dos modalidades de pago -->
@@ -69,18 +76,18 @@
             <thead>
               <tr>
                 <td></td>
-                <th scope="col">Mensual</th>
-                <th scope="col">Quincenal</th>
+                <th scope="col" data-texto="colMensual">Mensual</th>
+                <th scope="col" data-texto="colQuincenal">Quincenal</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">Total pagado</th>
+                <th scope="row" data-texto="totalPagado">Total pagado</th>
                 <td id="total-pagado-mensual">—</td>
                 <td id="total-pagado-quincenal">—</td>
               </tr>
               <tr>
-                <th scope="row">Total de intereses</th>
+                <th scope="row" data-texto="totalIntereses">Total de intereses</th>
                 <td id="total-intereses-mensual">—</td>
                 <td id="total-intereses-quincenal">—</td>
               </tr>
@@ -91,23 +98,27 @@
 
     </section>
 
-    <!-- Tabla mes a mes -->
+    <!-- Tabla mes a mes / quincena a quincena -->
     <section class="tarjeta seccion-tabla">
-      <h2>Tabla de amortización</h2>
-      <p class="nota-tabla">Así baja tu deuda pago a pago: una parte de cada cuota cubre el interés y el resto reduce el saldo. Elige cómo verla:</p>
-      <div class="selector-tabla" role="group" aria-label="Frecuencia de pago">
-        <button type="button" id="boton-mensual" class="boton-modo activo" aria-pressed="true">Por meses</button>
-        <button type="button" id="boton-quincenal" class="boton-modo" aria-pressed="false">Por quincenas</button>
+      <h2 data-texto="tituloTabla">Tabla de amortización</h2>
+      <p class="nota-tabla" data-texto="notaTabla">Así baja tu deuda pago a pago: una parte de cada cuota cubre el interés y el resto reduce el saldo. Elige cómo verla:</p>
+      <div class="controles-tabla">
+        <div class="selector-tabla" role="group" aria-label="Frecuencia de pago">
+          <button type="button" id="boton-mensual" class="boton-modo activo" aria-pressed="true" data-texto="botonMeses">Por meses</button>
+          <button type="button" id="boton-quincenal" class="boton-modo" aria-pressed="false" data-texto="botonQuincenas">Por quincenas</button>
+        </div>
+        <!-- Descarga el plan visible como archivo CSV (lo abre Excel) -->
+        <button type="button" id="boton-descargar" class="boton-descargar" data-texto="botonDescargar">Descargar plan de pagos (Excel)</button>
       </div>
       <div class="tabla-contenedor">
         <table>
           <thead>
             <tr>
               <th id="titulo-periodo">Mes</th>
-              <th>Cuota</th>
-              <th>Interés</th>
-              <th>Capital</th>
-              <th>Saldo</th>
+              <th data-texto="colCuota">Cuota</th>
+              <th data-texto="colInteres">Interés</th>
+              <th data-texto="colCapital">Capital</th>
+              <th data-texto="colSaldo">Saldo</th>
             </tr>
           </thead>
           <tbody id="cuerpo-tabla"></tbody>
@@ -118,7 +129,8 @@
   </main>
 
   <footer class="contenedor pie">
-    <p>Proyecto académico. Los valores calculados son referenciales.</p>
+    <p class="pie-aviso" data-texto="pieAviso">Sitio no oficial — proyecto académico de estudiante, sin afiliación con Yeshiva University.</p>
+    <p data-texto="pieNota">Los valores calculados son referenciales.</p>
   </footer>
 
   <script src="script.js"></script>
